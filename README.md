@@ -29,5 +29,12 @@ Accessing the Dark Web safely requires some important precautions. Follow these 
   sudo ufw allow 22/tcp       # SSH access
   sudo ufw enable
 
----
+### 🛡 Note on Docker Security
+
+When using **DarkDock**, many of the above concerns are **already handled by Docker**:
+
+- **Tor and nginx** run inside an isolated container, reducing exposure to the host system.  
+- **Hidden service ports** are not directly exposed to the public internet; only Tor handles the connections.  
+- **No direct `.onion` service files** are accessible from outside unless explicitly mounted.  
+
 
