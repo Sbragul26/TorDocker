@@ -26,7 +26,7 @@ When you use **DarkDock**, a lot of the tricky security stuff is already taken c
 **To build the container in x86_T64 Architecture:**
 
 ```sh
-sudo docker build -t tordocker -f Dockerfile .
+sudo docker build -t tordocker .
 ```
 
 **To build the container in arm Architecture:**
