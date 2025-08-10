@@ -2,13 +2,9 @@
 
 Host a website securely and privately on the Dark Web using Docker and Tor. This project sets up a Tor Onion Service that makes your site accessible via a `.onion` address while protecting your privacy.
 
----
-
 ## About
 
 This project allows you to host a website on the Dark Web using a Docker container connected to the Tor network. It supports multiple architectures (x86_64 and ARM) and provides a simple way to run a private, anonymous Onion Service.
-
----
 
 ## Security Tips for Using the Dark Web
 
@@ -32,11 +28,13 @@ When you use **DarkDock**, a lot of the tricky security stuff is already taken c
 ```sh
 sudo docker build -t tordocker -f Dockerfile .
 ```
+
 **To build the container in arm Architecture:**
 
 ```sh
 sudo docker build -f tordocker DockerFilePi .
 ```
+
 **To run the image for testing:**
 
 ```sh
@@ -50,7 +48,7 @@ sudo docker run \
   --restart unless-stopped \
   darkdock
 ```
----
+
 ## Get your Onion address
 ```sh
 docker logs darkdock
