@@ -1,30 +1,43 @@
-# DarkDock
+# darkwebDocker
+Host a website on the Dark Web. A  docker container is connected to the ToR network and is being used as on Onion Service. It's basically a Dark Web website running in a Docker!
 
-Host a website securely and privately on the Dark Web using Docker and Tor. This project sets up a Tor Onion Service that makes your site accessible via a `.onion` address while protecting your privacy.
+**To build the container in x86_T64 Architecture:**
 
----
+```sh
+sudo docker build -t tordocker -f Dockerfile .
+```
+**To build the container in arm Architecture:**
 
-## About
+```sh
+sudo docker build -f tordocker DockerFilePi .
+```
 
-This project allows you to host a website on the Dark Web using a Docker container connected to the Tor network. It supports multiple architectures (x86_64 and ARM) and provides a simple way to run a private, anonymous Onion Service.
+**To run the image for testing:**
 
----
+```sh
+sudo mkdir -p /docker/torweb/nginx 
+sudo docker run \
+--name mydarkweb \
+-h torr -d tordocker \
+-v /docker/torweb/nginx:/var/www/html/ \
+--restart unless-stopped
+```
 
-## Security Recommendations for Dark Web Access
+**Log into the container with the following:**
 
-Accessing the Dark Web safely requires some important precautions. Follow these best practices to protect your privacy and security:
+```sh
+sudo docker exec -it mydarkweb bash
+```
 
-- **Use a VPN:**  
-  Connect to a trusted VPN before launching the Tor Browser. This adds an extra layer of anonymity by hiding your IP address from your ISP.
+**To find out the link of the onion URL:**
 
-- **Use the Official Tor Browser:**  
-  Access `.onion` sites only through the Tor Browser to prevent identity leaks and tracking.
+```sh
+cat /var/lib/tor/hidden_service/hostname
+```
 
-- **Secure Your Server Ports:**  
-  If hosting a Tor Onion Service, restrict your server’s open ports using a firewall like UFW. Only allow essential ports (e.g., SSH) and never expose Onion Service ports directly to the internet.
 
-  ```bash
-  sudo ufw default deny incoming
-  sudo ufw default allow outgoing
-  sudo ufw allow 22/tcp       # SSH access
-  sudo ufw enable
+**To remove the container:**
+
+```sh
+sudo docker rm -fv mydarkweb
+```
