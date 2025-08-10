@@ -8,9 +8,10 @@ ufw default allow outgoing
 
 # Allow only HTTP for nginx inside container
 ufw allow 80/tcp
-# Tor will listen internally, so no need to expose its ports
 
+# Tor will listen internally, so no need to expose its ports
 ufw --force enable
+
 # Stop any running nginx (safety)
 nginx -s stop 2>/dev/null || true
 
