@@ -31,11 +31,12 @@ Accessing the Dark Web safely requires some important precautions. Follow these 
 
 ### 🛡 Note on Docker Security
 
-When using **DarkDock**, many of the above security concerns are **already mitigated by Docker**:
+When you use **DarkDock**, a lot of the tricky security stuff is already taken care of:
 
-- **Tor and nginx** run inside an isolated container, reducing exposure to your host system and limiting the attack surface.  
-- **Hidden service ports** are never bound to the public network interface; all external access goes through the Tor network.  
-- **`.onion` service keys and hostname files** remain inside the container’s private filesystem unless you intentionally mount them to the host.  
-- **Containerized environment** ensures any compromise is sandboxed and easier to isolate or rebuild.  
+- **Tor and nginx** run safely inside their own container, away from the rest of your system.  
+- The **hidden service ports** aren’t open to the internet — only Tor can reach them.  
+- Your **`.onion` address and keys** stay inside the container and can’t be seen unless you choose to share them.  
+- If something goes wrong, the container can be quickly rebuilt, keeping the rest of your system safe.  
+
 
 
