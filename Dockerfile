@@ -1,18 +1,26 @@
-FROM ubuntu:20.04
-#making an environment variable for timezone required for nginx setup
+#To build the container in x86_T64 Architecture
+#=================================================
+
+FROM archlinux:latest
+
 ENV TZ=Asia/Dhaka
-#copying a startup script
-COPY service_start.sh /service_start.sh
 
-RUN apt-get update && apt-get -y upgrade && apt-get -y dist-upgrade &&\
-    ln -snf /usr/share/zoneinfo/$TZ /etc/localtime &&\ 
-    echo $TZ > /etc/timezone &&\
-    apt-get install -y tor nginx nano &&\
-    chmod +x /service_start.sh
+RUN pacman -Syu --noconfirm && \
+    ln -sf /usr/share/zoneinfo/$TZ /etc/localtime && \
+    echo $TZ > /etc/timezone && \
+    pacman -S --noconfirm tor nginx nano shadow && \
+    pacman -Scc --noconfirm
 
-#copying tor and nginx config files
+RUN mkdir -p /var/lib/tor/hidden_service && \
+    chown -R tor:tor /var/lib/tor/hidden_service && \
+    chmod 700 /var/lib/tor/hidden_service
+
 COPY torrc /etc/tor/torrc
 COPY nginx.conf /etc/nginx/nginx.conf
 
-#starting the container with service_start.sh shell script
-ENTRYPOINT "/service_start.sh" && sleep infinity
+COPY service_start.sh /service_start.sh
+RUN chmod +x /service_start.sh
+
+EXPOSE 80 443 9050
+
+ENTRYPOINT ["/service_start.sh"]

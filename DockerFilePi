@@ -1,20 +1,22 @@
-FROM ubuntu:16.04
-#making an environment variable for timezone required
-#for nginx setup
+# To build the container in arm Architecture
+#============================================
+
+FROM archlinux:latest
+
 ENV TZ=Asia/Dhaka
 
 COPY service_start.sh /service_start.sh
 
-RUN apt-get update && apt-get -y dist-upgrade &&\
-    ln -snf /usr/share/zoneinfo/$TZ /etc/localtime &&\
-    echo $TZ > /etc/timezone &&\
-    apt-get install -y tor nano software-properties-common &&\
-    add-apt-repository ppa:nginx/stable &&\
-    apt-get update &&\
-    apt-get install -y nginx &&\
-    chmod +x /service_start.sh
+RUN pacman -Syu --noconfirm && \
+    ln -sf /usr/share/zoneinfo/$TZ /etc/localtime && \
+    echo $TZ > /etc/timezone && \
+    pacman -S --noconfirm tor nginx nano curl && \
+    chmod +x /service_start.sh && \
+    pacman -Scc --noconfirm
 
 COPY torrc /etc/tor/torrc
 COPY nginx.conf /etc/nginx/nginx.conf
 
-ENTRYPOINT "/service_start.sh"
+EXPOSE 80 443 9050
+
+ENTRYPOINT ["/service_start.sh"]
