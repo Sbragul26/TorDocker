@@ -31,5 +31,3 @@ Accessing the Dark Web safely requires some important precautions. Follow these 
 
 ---
 
-
-3.  Your React website should load securely through Tor.
