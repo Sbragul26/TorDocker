@@ -16,7 +16,7 @@ This project allows you to host a website on the Dark Web using a Docker contain
 - **Use the official Tor Browser** to stay anonymous.  
 - **Lock down your server ports** so only the ones you need (like SSH) are open. 
 
-### 🛡 Note on Docker Security
+## 🛡 Note on Docker Security
 
 When you use **DarkDock**, a lot of the tricky security stuff is already taken care of:
 
@@ -56,9 +56,5 @@ sudo docker run \
 docker logs darkdock
 ```
 ---
-**To remove the container:**
 
-```sh
-sudo docker rm -fv darkdock
-```
 
