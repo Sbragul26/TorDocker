@@ -1,4 +1,4 @@
-#To build the container in x86_T64 Architecture
+#To build the container in x86_T64 Architecture...
 #=================================================
 
 FROM archlinux:latest
