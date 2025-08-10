@@ -1,0 +1,10 @@
+# Tor configuration file for DarkDock
+
+# Define the directory where Tor will store your Onion Service keys and hostname
+HiddenServiceDir /var/lib/tor/hidden_service/
+
+# Map port 80 of the Onion Service to localhost port 80 (nginx inside the container)
+HiddenServicePort 80 127.0.0.1:80
+
+# Optional: increase log verbosity for debugging (comment out in production)
+# Log notice file /var/log/tor/notices.log
