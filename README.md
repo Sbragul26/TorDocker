@@ -28,4 +28,3 @@ Accessing the Dark Web safely requires some important precautions. Follow these 
   sudo ufw default allow outgoing
   sudo ufw allow 22/tcp       # SSH access
   sudo ufw enable
-
