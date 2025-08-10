@@ -23,7 +23,42 @@ When you use **DarkDock**, a lot of the tricky security stuff is already taken c
 - **Tor and nginx** run safely inside their own container, away from the rest of your system.  
 - The **hidden service ports** aren’t open to the internet — only Tor can reach them.  
 - Your **`.onion` address and keys** stay inside the container and can’t be seen unless you choose to share them.  
-- If something goes wrong, the container can be quickly rebuilt, keeping the rest of your system safe.  
+- If something goes wrong, the container can be quickly rebuilt, keeping the rest of your system safe.
 
+---
+## How to Build & Run DarkDock
+**To build the container in x86_T64 Architecture:**
 
+```sh
+sudo docker build -t tordocker -f Dockerfile .
+```
+**To build the container in arm Architecture:**
+
+```sh
+sudo docker build -f tordocker DockerFilePi .
+```
+**To run the image for testing:**
+
+```sh
+sudo mkdir -p /docker/torweb/nginx 
+sudo docker run \
+  --name darkdock \
+  -h darkdock \
+  -d \
+  -p 80:80 -p 443:443 -p 9050:9050 \
+  -v /docker/torweb/nginx:/var/www/html/ \
+  --restart unless-stopped \
+  darkdock
+```
+---
+## Get your Onion address
+```sh
+docker logs darkdock
+```
+---
+**To remove the container:**
+
+```sh
+sudo docker rm -fv darkdock
+```
 
